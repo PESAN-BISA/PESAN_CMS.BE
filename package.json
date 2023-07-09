@@ -21,7 +21,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*": ["eslint", "prettier --write"]
+    "src/**/*.ts": ["eslint", "prettier --write"]
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
