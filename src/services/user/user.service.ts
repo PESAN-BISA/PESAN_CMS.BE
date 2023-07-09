@@ -1,0 +1,17 @@
+import { Injectable } from '@nestjs/common';
+import { UserType } from './user.interface';
+
+@Injectable()
+export class UserService {
+  private readonly users: UserType[] = [
+    {
+      id: 1,
+      username: 'fikrialwan',
+      password: 'password',
+    },
+  ];
+
+  async findOne(username: string): Promise<UserType | undefined> {
+    return this.users.find((user: UserType) => user.username === username);
+  }
+}
