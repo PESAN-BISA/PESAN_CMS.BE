@@ -20,6 +20,7 @@ import { User } from './modules/user/entities/user.entity';
         database: configService.get<string>('DB_DATABASE'),
         entities: [User],
         synchronize: !configService.get<boolean>('DB_IS_PRODUCTION'),
+        migrations: [User],
       }),
       inject: [ConfigService],
     }),

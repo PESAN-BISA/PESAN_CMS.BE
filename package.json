@@ -18,7 +18,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "migration:create": "npm run typeorm:cli -- migration:create ./src/database/migrations/base-migration",
+    "migration:run": "npm run typeorm:cli -- migration:run -d ./src/config/migration.config.ts",
+    "migration:revert": "npm run typeorm:cli -- migration:revert -d ./src/config/migration.config.ts"
   },
   "lint-staged": {
     "src/**/*.ts": [
@@ -52,6 +56,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
+    "dotenv": "^16.3.1",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
