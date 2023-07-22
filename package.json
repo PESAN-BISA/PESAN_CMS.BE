@@ -22,7 +22,8 @@
     "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "migration:create": "npm run typeorm:cli -- migration:create ./src/database/migrations/base-migration",
     "migration:run": "npm run typeorm:cli -- migration:run -d ./src/config/migration.config.ts",
-    "migration:revert": "npm run typeorm:cli -- migration:revert -d ./src/config/migration.config.ts"
+    "migration:revert": "npm run typeorm:cli -- migration:revert -d ./src/config/migration.config.ts",
+    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n ./src/config/seed.config.ts"
   },
   "lint-staged": {
     "src/**/*.ts": [
@@ -42,7 +43,8 @@
     "mysql2": "^3.5.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",

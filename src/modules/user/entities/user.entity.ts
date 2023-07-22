@@ -21,7 +21,7 @@ export class User {
   role: 'ADMIN' | 'ASSESSEE' | 'ASSESSOR';
 
   @Column({ type: 'tinyint' })
-  current_semester: 1 | 2 | 3 | 4;
+  current_semester: 0 | 1 | 2 | 3 | 4;
 
   @CreateDateColumn()
   created_at: Date;
