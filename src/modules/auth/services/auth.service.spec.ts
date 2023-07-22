@@ -1,8 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { UserModule } from 'src/modules/user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { User } from 'src/modules/user/entities/user.entity';
+import { repositoryMockUserFactory } from 'src/modules/user/mock/user.mock';
+import { UserService } from 'src/modules/user/services/user.service';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -10,7 +13,6 @@ describe('AuthService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        UserModule,
         JwtModule.registerAsync({
           imports: [ConfigModule],
           useFactory: async (configService: ConfigService) => ({
@@ -22,7 +24,14 @@ describe('AuthService', () => {
           inject: [ConfigService],
         }),
       ],
-      providers: [AuthService],
+      providers: [
+        AuthService,
+        UserService,
+        {
+          provide: getRepositoryToken(User),
+          useFactory: repositoryMockUserFactory,
+        },
+      ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);

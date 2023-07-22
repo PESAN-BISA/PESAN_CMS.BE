@@ -3,6 +3,9 @@ import { UserController } from './user.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserService } from '../services/user.service';
+import { User } from '../entities/user.entity';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { repositoryMockUserFactory } from '../mock/user.mock';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -23,7 +26,13 @@ describe('UserController', () => {
         ConfigModule,
       ],
       controllers: [UserController],
-      providers: [UserService],
+      providers: [
+        UserService,
+        {
+          provide: getRepositoryToken(User),
+          useFactory: repositoryMockUserFactory,
+        },
+      ],
     }).compile();
 
     controller = module.get<UserController>(UserController);
